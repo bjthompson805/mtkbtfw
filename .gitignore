@@ -1,0 +1,7 @@
+mtkbtfw
+mtkbtfw.full
+mtkbtfw.debug
+*.pieo
+*.o
+.depend*
+*.8.gz

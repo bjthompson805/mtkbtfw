@@ -1,0 +1,50 @@
+.Dd October 28, 2026
+.Dt MTKBTFW 8
+.Os
+.Sh NAME
+.Nm mtkbtfw
+.Nd MediaTek MT79xx USB Bluetooth firmware download utility
+.Sh SYNOPSIS
+.Nm
+.Op Fl DFIR
+.Fl d Ar device_name
+.Op Fl f Ar firmware_path
+.Sh DESCRIPTION
+The
+.Nm
+utility downloads the patch file to MediaTek MT79xx USB Bluetooth
+adapters, which refuse HCI commands until it is loaded.
+.Xr ng_ubt 4
+attaches to these adapters before the patch is loaded, so
+.Nm
+detaches it, loads the patch, enables the Bluetooth function and resets
+the device so that
+.Xr ng_ubt 4
+attaches again.
+It is normally run by
+.Xr devd 8 .
+.Pp
+The options are as follows:
+.Bl -tag -width indent
+.It Fl D
+Enable verbose debugging.
+.It Fl d Ar device_name
+The ugen device, for example
+.Pa ugen1.2 .
+.It Fl F
+Run even if the same device was handled less than a minute ago.
+.It Fl f Ar firmware_path
+Directory holding the
+.Pa mediatek/
+firmware tree, default
+.Pa /usr/local/share/mtkbt-firmware .
+.It Fl I
+Enable informational output.
+.It Fl R
+Reset the Bluetooth subsystem before loading.
+.El
+.Sh SEE ALSO
+.Xr ng_ubt 4 ,
+.Xr rtlbtfw 8
+.Sh HISTORY
+Ported from the MT79xx path of Linux's btmtk driver.
